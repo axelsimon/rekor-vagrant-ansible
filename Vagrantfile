@@ -79,7 +79,7 @@ Vagrant.configure("2") do |config|
       sigstore.vm.provision "ansible_local" do |ansible|
           ansible.verbose = "v"
           ansible.galaxy_command = "sudo ansible-galaxy install -r /roles/rekor/requirements.yml"
-          ansible.playbook = "playbook.yml"
+          ansible.playbook = "provisioning/playbook.yml"
           ansible.extra_vars = {
             ansible_python_interpreter:"/usr/bin/python3",
           }
@@ -90,7 +90,7 @@ Vagrant.configure("2") do |config|
       if defined? (qualityoflife) and qualityoflife == true
         sigstore.vm.provision "ansible_local" do |ansible|
             ansible.verbose = "v"
-            ansible.playbook = "quality_of_life.yml"
+            ansible.playbook = "provisioning/quality_of_life.yml"
             if defined? (verbose) and verbose == true
               ansible.verbose = true
             end

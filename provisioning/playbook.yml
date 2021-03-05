@@ -3,7 +3,8 @@
   become: true
   become_method: sudo
   pre_tasks:
-    #- name: Instal required Ansible roles
+    #- name: Install required Ansible roles
+    #  shell: "vagrant-galaxy -r requirements.yml"
       
     - name: Update repositories (RHEL, CentOS, Fedora)
       dnf: update_cache=yes
