@@ -1,0 +1,9 @@
+- name: Copy MariaDB / MySQL preparation script
+  ansible.builtin.copy:
+    src: createdb.sh
+    dest: /home/sigstore/scripts/createdb.sh
+
+- name: Run MariaDB / MySQL database and user preparation script
+  ansible.builtin.script:
+    cmd: /home/sigstore/scripts/creadedb.sh
+

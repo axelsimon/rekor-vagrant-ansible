@@ -1,0 +1,4 @@
+---
+# tasks file for trillian
+- include: prerequisites.yml
+- include: trillian.yml

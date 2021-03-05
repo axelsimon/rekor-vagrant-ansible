@@ -1,0 +1,4 @@
+- name: install rekor server
+  shell: "go build -o rekor-server"
+  args:
+    chdir: "$HOME/rekor/cmd/server/"

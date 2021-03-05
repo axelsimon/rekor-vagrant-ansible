@@ -1,0 +1,22 @@
+---
+- hosts: all
+  become: true
+  become_method: sudo
+  pre_tasks:
+    #- name: Instal required Ansible roles
+      
+    - name: Update repositories (RHEL, CentOS, Fedora)
+      dnf: update_cache=yes
+      when: ansible_distribution == "Fedora" or ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
+
+    - name: Update repositories (Debian, Ubuntu)
+      apt: update_cache=yes
+      when: ansible_distribution == "Debian" or ansible_distribution == "Ubuntu"
+
+    - name: set eth0 MTU to 1420, to avoid api.bitbucket.org TLS timeout
+      shell: "ip link set dev eth0 mtu 1420"
+
+  roles:
+#    - community.mysql
+    - trillian-log-server
+    - rekor
