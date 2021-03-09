@@ -1,4 +1,12 @@
-- name: install rekor server
-  shell: "go build -v -o rekor-server"
+- name: Donwload rekor server source code
+  shell: "go get -u -t github.com/sigstore/rekor/cmd/server"
+
+- name: Build rekor server
+  shell: "go build -o rekor-server"
   args:
-    chdir: "$HOME/rekor/cmd/server/"
+    chdir: "$HOME/go/src/github.com/sigstore/rekor/cmd/server/"
+
+- name: Install rekor server
+  ansible.builtin.copy:
+    src: "$HOME/go/src/github.com/sigstore/rekor/cmd/rekor-server"
+    dest: "/usr/local/bin/"

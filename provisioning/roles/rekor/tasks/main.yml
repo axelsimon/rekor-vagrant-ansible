@@ -1,5 +1,6 @@
 ---
-# tasks file for SigStore's rekor
+# tasks file for sigstore's rekor server
 - include: prerequisites.yml
-- include: git-repos.yml
+#- include: git-repos.yml
+- include: rekor-cli.yml
 - include: rekor-server.yml

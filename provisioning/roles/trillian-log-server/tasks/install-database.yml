@@ -1,0 +1,5 @@
+tasks:
+  import_role:
+    name: community.mysql
+  include_role:
+    name: community.mysql

@@ -51,17 +51,17 @@ end
 
 Vagrant.configure("2") do |config|
   (1..instances).each do |i|
-    config.vm.define "SigStore#{i}" do |sigstore|
+    config.vm.define "sigstore#{i}" do |sigstore|
       sigstore.vm.box = "fedora/33-cloud-base"
       # Should you require machines to share a private network
       # Note, you will need to create the network first within
       # your provider (VirtualBox / Libvirt etc)
-      # SigStore.vm.network :private_network, ip: "10.0.0.#{i}1"
-#      SigStore.vm.network "forwarded_port", guest: 443, host: "844#{i}"
+      # sigstore.vm.network :private_network, ip: "10.0.0.#{i}1"
+#      sigstore.vm.network "forwarded_port", guest: 443, host: "844#{i}"
       if instances == 1
-        hostname = "SigStore"
+        hostname = "sigstore"
       else
-        hostname = "SigStore-#{i}"
+        hostname = "sigstore-#{i}"
       end
       sigstore.vm.hostname = "#{hostname}"
       if defined? (repo)

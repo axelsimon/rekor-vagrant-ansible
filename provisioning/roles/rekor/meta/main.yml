@@ -1,6 +1,6 @@
 galaxy_info:
   author: axel simon
-  description: SigStore rekor, an append-only store for software transparency
+  description: sigstore rekor, an append-only store for software transparency
   company: Red Hat
 
   # If the issue tracker for your role is not on github, uncomment the

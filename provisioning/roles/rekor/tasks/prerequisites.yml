@@ -7,4 +7,3 @@
   dnf:
     name: golang
     state: present
-

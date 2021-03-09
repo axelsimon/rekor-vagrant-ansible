@@ -1,4 +1,4 @@
 - name: Clone Rekor server repo
   git:
-    repo: https://github.com/SigStore/rekor
-    dest: $HOME/SigStore/rekor
+    repo: https://github.com/sigstore/rekor
+    dest: $HOME/sigstore/rekor
