@@ -77,8 +77,8 @@ Vagrant.configure("2") do |config|
         vb.cpus = "#{cpus}"
       end
       sigstore.vm.provision "ansible_local" do |ansible|
-          ansible.verbose = "v"
-          ansible.galaxy_command = "sudo ansible-galaxy install -r /roles/rekor/requirements.yml"
+          ansible.verbose = "vvv"
+          #ansible.galaxy_command = "sudo ansible-galaxy install -r provisioning/roles/rekor/requirements.yml"
           ansible.playbook = "provisioning/playbook.yml"
           ansible.extra_vars = {
             ansible_python_interpreter:"/usr/bin/python3",
@@ -89,8 +89,11 @@ Vagrant.configure("2") do |config|
       end
       if defined? (qualityoflife) and qualityoflife == true
         sigstore.vm.provision "ansible_local" do |ansible|
-            ansible.verbose = "v"
+            ansible.verbose = "vvv"
             ansible.playbook = "provisioning/quality_of_life.yml"
+            ansible.extra_vars = {
+              ansible_python_interpreter:"/usr/bin/python3",
+            }
             if defined? (verbose) and verbose == true
               ansible.verbose = true
             end

@@ -1,12 +1,34 @@
-- name: Donwload rekor server source code
-  shell: "go get -u -t github.com/sigstore/rekor/cmd/cli"
+--- 
+- name: Check for rekor cli source code presence
+  stat:
+    path: "$HOME/go/src/github.com/sigstore/rekor/cmd/cli"
+  register: has_rekor_cli_code
 
-- name: Build rekor server
-  shell: "go build -o rekor"
+- name: Donwload rekor cli source code
+  command: "go get -u -t github.com/sigstore/rekor/cmd/cli"
+  ignore_errors: yes
+  when: not has_rekor_cli_code.stat.exists
+
+- name: Check if we have already built rekor cli
+  stat:
+    path: "$HOME/go/src/github.com/sigstore/rekor/cmd/cli/rekor"
+  register: has_rekor_cli
+
+- name: Build rekor cli
+  command: "go build -v -o rekor"
   args:
     chdir: "$HOME/go/src/github.com/sigstore/rekor/cmd/cli/"
+  when: not has_rekor_cli.stat.exists
 
-- name: Install rekor server
+- name:  Check if we have already installed rekor cli
+  stat:
+    path: "/usr/local/bin/rekor"
+  register: has_rekor_cli_installed
+
+- name: Install rekor cli
   ansible.builtin.copy:
-    src: "$HOME/go/src/github.com/sigstore/rekor/cmd/rekor"
+    src: "~/go/src/github.com/sigstore/rekor/cmd/cli/rekor"
     dest: "/usr/local/bin/"
+    remote_src: yes
+    mode: u=rwx,g=rx,o=x
+  when: not has_rekor_cli_installed.stat.exists
